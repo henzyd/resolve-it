@@ -2139,10 +2139,10 @@ rollup@^4.34.9, rollup@^4.40.0:
     "@rollup/rollup-win32-x64-msvc" "4.45.1"
     fsevents "~2.3.2"
 
-rr-next-routes@^0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/rr-next-routes/-/rr-next-routes-0.0.9.tgz#b8571f69639f7b233a116ff2d884252efbb51b7c"
-  integrity sha512-fIjmtwFmC0kCrSoq2Hdw3XUazcXcyD9KgaBRgnJZuPEBaw0CXzLtXgBnCDi2FGgUGLodl5raQS6RwNBDuAAS2A==
+rr-next-routes@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/rr-next-routes/-/rr-next-routes-0.0.8.tgz#1af1b5763f5ef2557422aa5f487b74010b9e4048"
+  integrity sha512-PqjnATNSDNQa9yfjZ0SfhfujASR/DAyj7oUWxpjfhRXRplo2n1PQ6UPJTDLs1PuYbFgRB9Gw3BE+eeH80rBTeg==
 
 safe-buffer@5.1.2:
   version "5.1.2"
