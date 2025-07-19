@@ -9,7 +9,7 @@ import type { FieldConfig } from "formik";
 
 type Props = Omit<InputProps, "label"> &
   FieldConfig & {
-    label?: LabelProps;
+    label?: LabelProps & string;
     description?: React.ComponentProps<"p">;
     wrapperClassName?: string;
     subLabel?: React.ComponentProps<"small">;
