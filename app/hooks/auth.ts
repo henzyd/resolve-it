@@ -1,7 +1,7 @@
 import { isAxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
-import { notifyError, notifySuccess } from "~/utils/toast";
-import { JWT_KEY } from "~/utils/constants";
+import { notifyError, notifySuccess } from "~/lib/toast";
+import { JWT_KEY } from "~/lib/constants";
 import AuthService from "~/services/auth";
 import { axiosPrivate } from "~/config/axios";
 
@@ -9,7 +9,8 @@ export function useLogin() {
   return useMutation({
     mutationFn: AuthService.login,
     onSuccess: async (data) => {
-      axiosPrivate.defaults.headers.common["Authorization"] = "Bearer " + data.access;
+      axiosPrivate.defaults.headers.common["Authorization"] =
+        "Bearer " + data.access;
       if (data.rememberMe) {
         localStorage.setItem(JWT_KEY, JSON.stringify(data.refresh));
         sessionStorage.removeItem(JWT_KEY);
@@ -23,13 +24,16 @@ export function useLogin() {
       if (isAxiosError(error)) {
         if (error.response?.status === 400) {
           notifyError({
-            message: "Invalid email or password, please check your inputs and try again",
+            message:
+              "Invalid email or password, please check your inputs and try again",
           });
         } else if (error.response?.status === 401) {
           notifyError({ message: error.response.data.error });
         } else if (error.request?.status === 403) {
           if (error.response?.data?.error === "This account as been blocked") {
-            notifyError({ message: "This account has been blocked by the admin" });
+            notifyError({
+              message: "This account has been blocked by the admin",
+            });
           } else {
             notifyError({
               message:
@@ -88,14 +92,18 @@ export function useResetPassword() {
     onError(error) {
       if (isAxiosError(error)) {
         if (error.response?.status === 400) {
-          notifyError({ message: "Token not valid or has expired, please try again" });
+          notifyError({
+            message: "Token not valid or has expired, please try again",
+          });
         } else if (error.response?.status === 401) {
           notifyError({ message: error.response.data.detail });
         }
       }
     },
     onSuccess: () => {
-      notifySuccess({ message: "Password reset successfully!, please login to continue" });
+      notifySuccess({
+        message: "Password reset successfully!, please login to continue",
+      });
     },
   });
 }
@@ -128,8 +136,13 @@ export function useVerifyOtp() {
           const data = error.response?.data;
 
           if (data[0] === "OTP expired") {
-            notifyError({ message: "OTP expired!, please request for a new one" });
-          } else notifyError({ message: "Invalid OTP!, please check your input and try again" });
+            notifyError({
+              message: "OTP expired!, please request for a new one",
+            });
+          } else
+            notifyError({
+              message: "Invalid OTP!, please check your input and try again",
+            });
         }
       }
     },

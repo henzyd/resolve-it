@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
 import UsersService from "~/services/users";
-import { notifyError } from "~/utils/toast";
+import { notifyError } from "~/lib/toast";
 
 export function useGetMe() {
   return useQuery<User>({
