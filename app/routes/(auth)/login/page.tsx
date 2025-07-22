@@ -76,7 +76,7 @@ export default function Login() {
                   name="password"
                 />
                 <div className="flex items-center justify-between gap-4">
-                  <div className="mediumMobile:self-start flex items-center gap-1">
+                  <div className="mediumMobile:self-start flex items-center gap-2">
                     <Checkbox
                       onChange={() => {
                         setFieldValue("rememberMe", !values.rememberMe);

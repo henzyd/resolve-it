@@ -2,14 +2,12 @@ import axiosInstance, { axiosPrivate } from "~/config/axios";
 
 class AuthService {
   static login = async (data: { email: string; password: string; rememberMe: boolean }) => {
-    const {
-      data: { data: response },
-    } = await axiosInstance.post<{
-      data: {
-        access: string;
-        refresh: string;
-      };
-    }>("/auth/login", data);
+    const { data: response } = await axiosInstance.post<
+      User & {
+        access_token: string;
+        refresh_token: string;
+      }
+    >("/auth/login", data);
     return { ...response, rememberMe: data.rememberMe };
   };
 

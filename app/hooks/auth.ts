@@ -4,20 +4,37 @@ import { notifyError, notifySuccess } from "~/lib/toast";
 import { JWT_KEY } from "~/lib/constants";
 import AuthService from "~/services/auth";
 import { axiosPrivate } from "~/config/axios";
+import { useAuth } from "~/store/auth";
+import UsersService from "~/services/users";
 
 export function useLogin() {
+  const { setUser } = useAuth();
+
   return useMutation({
     mutationFn: AuthService.login,
     onSuccess: async (data) => {
-      axiosPrivate.defaults.headers.common["Authorization"] = "Bearer " + data.access;
+      axiosPrivate.defaults.headers.common["Authorization"] = "Bearer " + data.access_token;
+
       if (data.rememberMe) {
-        localStorage.setItem(JWT_KEY, JSON.stringify(data.refresh));
+        localStorage.setItem(JWT_KEY, JSON.stringify(data.refresh_token));
         sessionStorage.removeItem(JWT_KEY);
       } else {
-        sessionStorage.setItem(JWT_KEY, JSON.stringify(data.refresh));
+        sessionStorage.setItem(JWT_KEY, JSON.stringify(data.refresh_token));
         localStorage.removeItem(JWT_KEY);
       }
-      notifySuccess({ message: "Login successful" });
+
+      try {
+        const userData = await UsersService.getMe();
+        setUser(userData);
+        notifySuccess({ message: "Login successful" });
+      } catch (error) {
+        axiosPrivate.defaults.headers.common["Authorization"] = "";
+        localStorage.removeItem(JWT_KEY);
+        sessionStorage.removeItem(JWT_KEY);
+        notifyError({
+          message: "Login successful but failed to load user data. Please try again.",
+        });
+      }
     },
     onError: (error) => {
       if (isAxiosError(error)) {
