@@ -29,7 +29,8 @@
     "rr-next-routes": "^0.0.8",
     "sonner": "^2.0.6",
     "tailwind-merge": "^3.3.1",
-    "yup": "^1.6.1"
+    "yup": "^1.6.1",
+    "zustand": "^5.0.6"
   },
   "devDependencies": {
     "@react-router/dev": "^7.7.0",
