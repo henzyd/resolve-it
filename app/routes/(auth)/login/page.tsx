@@ -10,9 +10,7 @@ import { Button } from "~/components/ui/button";
 import { Checkbox } from "~/components/ui/checkbox";
 
 const validationSchema = Yup.object({
-  email: Yup.string()
-    .email("Invalid email address")
-    .required("Email is required"),
+  email: Yup.string().email("Invalid email address").required("Email is required"),
   password: Yup.string().required("Password is required"),
 });
 
@@ -61,11 +59,7 @@ export default function Login() {
           validateOnBlur={false}
         >
           {({ handleSubmit, setFieldValue, isSubmitting, values }) => (
-            <form
-              onSubmit={handleSubmit}
-              method="POST"
-              className="flex w-full flex-col gap-5"
-            >
+            <form onSubmit={handleSubmit} method="POST" className="flex w-full flex-col gap-5">
               <div className="flex flex-col gap-4">
                 <FormField
                   name="email"
@@ -107,7 +101,7 @@ export default function Login() {
                   })
                 }
               />
-              <Button type="submit" size="lg" loading={isSubmitting}>
+              <Button type="submit" loading={isSubmitting}>
                 Login
               </Button>
             </form>

@@ -5,17 +5,9 @@ type Props = {
   loaderClassName?: string;
 };
 
-export default function AppLoader({
-  containerClassName,
-  loaderClassName,
-}: Props) {
+export default function AppLoader({ containerClassName, loaderClassName }: Props) {
   return (
-    <div
-      className={cn(
-        "flex h-screen w-full items-center justify-center",
-        containerClassName
-      )}
-    >
+    <div className={cn("flex h-screen w-full items-center justify-center", containerClassName)}>
       <span className={cn("loader", loaderClassName)} />
     </div>
   );

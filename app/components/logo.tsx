@@ -6,10 +6,7 @@ type Props = React.ComponentProps<"h5"> & {
 
 export default function Logo({ className, ...props }: Props) {
   return (
-    <h5
-      {...props}
-      className={cn("text-2xl font-semibold italic text-nowrap", className)}
-    >
+    <h5 {...props} className={cn("text-2xl font-semibold text-nowrap italic", className)}>
       Resolve It
     </h5>
   );

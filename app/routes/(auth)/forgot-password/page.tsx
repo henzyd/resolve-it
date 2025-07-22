@@ -9,9 +9,7 @@ import FormField from "~/components/forms/fields/form-field";
 import { Button } from "~/components/ui/button";
 
 const validationSchema = Yup.object({
-  email: Yup.string()
-    .email("Invalid email address")
-    .required("Email is required"),
+  email: Yup.string().email("Invalid email address").required("Email is required"),
 });
 
 export default function ForgotPassword() {
@@ -55,11 +53,7 @@ export default function ForgotPassword() {
         validateOnBlur={false}
       >
         {({ handleSubmit, isSubmitting }) => (
-          <form
-            onSubmit={handleSubmit}
-            method="POST"
-            className="flex w-full flex-col gap-5"
-          >
+          <form onSubmit={handleSubmit} method="POST" className="flex w-full flex-col gap-5">
             <FormField
               name="email"
               label="Email Address"

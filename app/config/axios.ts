@@ -54,10 +54,7 @@ axiosPrivate.interceptors.response.use(
     const status = error?.response?.status;
 
     if (status === 401) {
-      if (
-        message === "Token is invalid or expired" ||
-        message === "Token is blacklisted"
-      ) {
+      if (message === "Token is invalid or expired" || message === "Token is blacklisted") {
         logout();
       } else {
         const sessionToken = sessionStorage.getItem(JWT_KEY);
@@ -73,8 +70,7 @@ axiosPrivate.interceptors.response.use(
           });
           if (access && refresh) {
             originalRequest.headers.Authorization = `Bearer ${access}`;
-            axiosPrivate.defaults.headers.common["Authorization"] =
-              "Bearer " + access;
+            axiosPrivate.defaults.headers.common["Authorization"] = "Bearer " + access;
 
             const stringifiedRefresh = JSON.stringify(refresh);
 

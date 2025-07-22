@@ -65,11 +65,7 @@ export default function ResetPassword() {
         validateOnBlur={false}
       >
         {({ handleSubmit, isSubmitting }) => (
-          <form
-            onSubmit={handleSubmit}
-            method="POST"
-            className="flex w-full flex-col gap-5"
-          >
+          <form onSubmit={handleSubmit} method="POST" className="flex w-full flex-col gap-5">
             <FormField
               label="Password"
               type={"password"}
@@ -84,12 +80,7 @@ export default function ResetPassword() {
               placeholder="****************"
               name="re_password"
             />
-            <Button
-              type="submit"
-              size="lg"
-              className="!mt-2"
-              loading={isSubmitting}
-            >
+            <Button type="submit" size="lg" className="!mt-2" loading={isSubmitting}>
               Reset Password
             </Button>
           </form>

@@ -1,11 +1,7 @@
 import axiosInstance, { axiosPrivate } from "~/config/axios";
 
 class AuthService {
-  static login = async (data: {
-    email: string;
-    password: string;
-    rememberMe: boolean;
-  }) => {
+  static login = async (data: { email: string; password: string; rememberMe: boolean }) => {
     const {
       data: { data: response },
     } = await axiosInstance.post<{
@@ -33,10 +29,7 @@ class AuthService {
   };
 
   static forgotPassword = async (data: Record<"email", string>) => {
-    const { data: response } = await axiosInstance.post(
-      "/auth/reset-password",
-      data
-    );
+    const { data: response } = await axiosInstance.post("/auth/reset-password", data);
     return response;
   };
 
@@ -55,15 +48,9 @@ class AuthService {
   };
 
   static changePassword = async (
-    data: Record<
-      "current_password" | "new_password" | "re_new_password",
-      string
-    >
+    data: Record<"current_password" | "new_password" | "re_new_password", string>
   ) => {
-    const { data: response } = await axiosPrivate.post(
-      `/auth/change/password/`,
-      data
-    );
+    const { data: response } = await axiosPrivate.post(`/auth/change/password/`, data);
     return response;
   };
 
@@ -73,10 +60,7 @@ class AuthService {
   };
 
   static verifyOtp = async (data: Record<"otp", string>) => {
-    const { data: response } = await axiosInstance.post(
-      "/auth/otp/verify",
-      data
-    );
+    const { data: response } = await axiosInstance.post("/auth/otp/verify", data);
     return response;
   };
 }

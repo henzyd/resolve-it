@@ -20,8 +20,7 @@ export default function Otp({ email }: { email: string }) {
   const [count, setCount] = useState(60);
 
   const { mutateAsync: verifyOtp } = useVerifyOtp();
-  const { mutateAsync: requestOtp, isPending: requestIsPending } =
-    useRequestOtp();
+  const { mutateAsync: requestOtp, isPending: requestIsPending } = useRequestOtp();
 
   useEffect(() => {
     if (count > 0 && count < 60) {
@@ -52,11 +51,7 @@ export default function Otp({ email }: { email: string }) {
         validateOnBlur={false}
       >
         {({ handleSubmit, values, isSubmitting }) => (
-          <form
-            onSubmit={handleSubmit}
-            className="flex w-full flex-col gap-5"
-            method="POST"
-          >
+          <form onSubmit={handleSubmit} className="flex w-full flex-col gap-5" method="POST">
             <OTPField name="otp" required maxLength={OTP_LENGTH} />
             <Button
               type="submit"

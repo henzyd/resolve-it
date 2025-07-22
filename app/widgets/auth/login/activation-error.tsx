@@ -8,11 +8,7 @@ type Props = {
   onVerifyRequest: () => void;
 };
 
-export default function ActivationError({
-  email,
-  error,
-  onVerifyRequest,
-}: Props) {
+export default function ActivationError({ email, error, onVerifyRequest }: Props) {
   const { mutateAsync: requestOtp, isPending } = useRequestOtp();
 
   async function handleActivation() {
@@ -34,12 +30,9 @@ export default function ActivationError({
       <p className="text-xs font-medium text-red-600">{errorMsg}</p>
       <button
         type="button"
-        className={cn(
-          "text-primary text-xs font-semibold disabled:opacity-50",
-          {
-            underline: !isPending,
-          }
-        )}
+        className={cn("text-primary text-xs font-semibold disabled:opacity-50", {
+          underline: !isPending,
+        })}
         onClick={handleActivation}
         disabled={isPending}
       >

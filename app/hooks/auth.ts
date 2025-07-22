@@ -9,8 +9,7 @@ export function useLogin() {
   return useMutation({
     mutationFn: AuthService.login,
     onSuccess: async (data) => {
-      axiosPrivate.defaults.headers.common["Authorization"] =
-        "Bearer " + data.access;
+      axiosPrivate.defaults.headers.common["Authorization"] = "Bearer " + data.access;
       if (data.rememberMe) {
         localStorage.setItem(JWT_KEY, JSON.stringify(data.refresh));
         sessionStorage.removeItem(JWT_KEY);
@@ -24,8 +23,7 @@ export function useLogin() {
       if (isAxiosError(error)) {
         if (error.response?.status === 400) {
           notifyError({
-            message:
-              "Invalid email or password, please check your inputs and try again",
+            message: "Invalid email or password, please check your inputs and try again",
           });
         } else if (error.response?.status === 401) {
           notifyError({ message: error.response.data.error });
