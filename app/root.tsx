@@ -9,6 +9,7 @@ import {
 import type { Route } from "./+types/root";
 import TanstackQueryProvider from "./providers/tanstack-query";
 import { Toaster } from "./components/ui/sonner";
+import "./styles/global.css";
 
 export const links: Route.LinksFunction = () => [];
 
