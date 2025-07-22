@@ -4,15 +4,14 @@ import { BsEyeSlash } from "react-icons/bs";
 import { AiOutlineEye } from "react-icons/ai";
 import { Input, type InputProps } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
-import type { LabelProps } from "~/components/ui/label";
 import { FormFieldWrapper } from "../form-field-wrapper";
 
 type Props = Omit<InputProps, "label"> &
   FieldConfig & {
-    label?: LabelProps & string;
-    description?: React.ComponentProps<"p">;
+    label?: string;
+    description?: string;
     wrapperClassName?: string;
-    subLabel?: React.ComponentProps<"small">;
+    subLabel?: string;
   };
 
 type PasswordToggleButtonProps = {
@@ -21,10 +20,10 @@ type PasswordToggleButtonProps = {
 };
 
 const PasswordToggleButton = ({ showPassword, onToggle }: PasswordToggleButtonProps) => (
-  <Button type="button" variant="ghost" size="icon" onClick={onToggle}>
+  <button type="button" onClick={onToggle}>
     {showPassword ? <BsEyeSlash /> : <AiOutlineEye />}
     <span className="sr-only">{showPassword ? "Hide password" : "Show password"}</span>
-  </Button>
+  </button>
 );
 
 export default function FormField({ type, endAdornment, ...props }: Props) {

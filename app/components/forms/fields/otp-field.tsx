@@ -7,13 +7,12 @@ import {
   InputOTPSlot,
   InputOTPSeparator,
 } from "~/components/ui/input-otp";
-import { type LabelProps } from "~/components/ui/label";
 
 type Props = FieldConfig & {
-  label?: LabelProps | string;
-  description?: React.ComponentProps<"p"> | string;
+  label?: string;
+  description?: string;
   wrapperClassName?: string;
-  subLabel?: React.ComponentProps<"small"> | string;
+  subLabel?: string;
   required?: boolean;
   maxLength?: number;
   className?: string;
