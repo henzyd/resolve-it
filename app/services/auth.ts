@@ -1,14 +1,21 @@
 import axiosInstance, { axiosPrivate } from "~/config/axios";
 
+type Token = {
+  access_token: string;
+  refresh_token: string;
+};
+
 class AuthService {
   static login = async (data: { email: string; password: string; rememberMe: boolean }) => {
-    const { data: response } = await axiosInstance.post<
-      User & {
-        access_token: string;
-        refresh_token: string;
-      }
-    >("/auth/login", data);
+    const { data: response } = await axiosInstance.post<User & Token>("/auth/login", data);
     return { ...response, rememberMe: data.rememberMe };
+  };
+
+  static signup = async (
+    data: Record<"first_name" | "last_name" | "email" | "password", string>
+  ) => {
+    const { data: response } = await axiosInstance.post("/auth/signup", data);
+    return response;
   };
 
   static logout = async (data: { refresh_token: string }) => {
@@ -16,12 +23,9 @@ class AuthService {
     return response;
   };
 
-  static refreshJwt = async ({ refresh }: Record<"refresh", string>) => {
-    const { data } = await axiosInstance.post<{
-      access: string;
-      refresh: string;
-    }>("/auth/jwt/refresh", {
-      refresh,
+  static refreshJwt = async ({ refresh_token }: Record<"refresh_token", string>) => {
+    const { data } = await axiosInstance.post<Token>("/auth/jwt/refresh", {
+      refresh_token,
     });
     return data;
   };

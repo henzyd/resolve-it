@@ -59,9 +59,12 @@ export default function OTPField({
           maxLength={maxLength}
           value={field.value || ""}
           onChange={(value) => {
-            form.setFieldValue(field.name, value);
-            if (onChange) {
-              onChange(value);
+            const regex = /^[0-9]*$/;
+            if (regex.test(value)) {
+              form.setFieldValue(field.name, value);
+              if (onChange) {
+                onChange(value);
+              }
             }
           }}
           onBlur={() => {

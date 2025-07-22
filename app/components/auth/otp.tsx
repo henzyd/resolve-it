@@ -51,11 +51,10 @@ export default function Otp({ email }: { email: string }) {
         validateOnBlur={false}
       >
         {({ handleSubmit, values, isSubmitting }) => (
-          <form onSubmit={handleSubmit} className="flex w-full flex-col gap-5" method="POST">
-            <OTPField name="otp" required maxLength={OTP_LENGTH} />
+          <form onSubmit={handleSubmit} className="mt-4 flex w-full flex-col gap-8" method="POST">
+            <OTPField name="otp" required maxLength={OTP_LENGTH} wrapperClassName="self-center" />
             <Button
               type="submit"
-              size="lg"
               loading={isSubmitting}
               disabled={values.otp.length !== OTP_LENGTH}
             >

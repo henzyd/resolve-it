@@ -65,6 +65,43 @@ export function useLogin() {
   });
 }
 
+export function useSignup() {
+  return useMutation({
+    mutationFn: AuthService.signup,
+    onError: (error) => {
+      if (isAxiosError(error)) {
+        if (error.response?.status === 400) {
+          const data = error.response.data;
+          if (typeof data.email?.[0] === "string") {
+            const msg = data.email?.[0];
+            return notifyError({
+              message: msg.slice(0, 1).toUpperCase() + msg.slice(1),
+            });
+          }
+          notifyError({
+            message: "Invalid email or password, please check your inputs and try again",
+          });
+        } else if (error.response?.status === 401) {
+          notifyError({ message: error.response.data.error });
+        } else if (error.request?.status === 403) {
+          if (error.response?.data?.error === "This account as been blocked") {
+            notifyError({ message: "This account has been blocked by the admin" });
+          } else {
+            notifyError({
+              message:
+                "You have not activated your account yet, please check your email for activation link",
+            });
+          }
+        }
+      } else {
+        if (typeof error === "string") {
+          notifyError(error);
+        }
+      }
+    },
+  });
+}
+
 export function useForgotPassword() {
   return useMutation({
     mutationFn: AuthService.forgotPassword,

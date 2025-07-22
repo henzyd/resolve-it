@@ -50,6 +50,10 @@
 }
 
 @layer base {
+  html {
+    line-height: 1;
+  }
+
   button {
     @apply cursor-pointer;
   }

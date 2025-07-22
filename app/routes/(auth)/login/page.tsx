@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -25,12 +25,17 @@ export default function Login() {
 
   const { mutateAsync: login, error } = useLogin();
 
+  const getSignupUrl = useCallback(() => {
+    const origin = searchParams.get("origin");
+    return origin ? `/signup?origin=${origin}` : "/signup";
+  }, [searchParams]);
+
   const { email, isVerified } = verificationState;
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col items-center gap-1">
-        <h1 className="largeMobile:text-lg text-xl">Welcome</h1>
+      <div className="flex flex-col items-center gap-2">
+        <h1 className="largeMobile:text-lg text-xl font-medium">Welcome</h1>
         <small className="largeMobile:text-xs text-center">
           Please enter your login details to continue
         </small>
@@ -104,6 +109,15 @@ export default function Login() {
               <Button type="submit" loading={isSubmitting}>
                 Login
               </Button>
+              <small className="text-center">
+                Don't have an account?{" "}
+                <Link
+                  to={getSignupUrl()}
+                  className="text-primary pl-0.5 font-semibold hover:underline"
+                >
+                  Signup
+                </Link>
+              </small>
             </form>
           )}
         </Formik>
