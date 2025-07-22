@@ -1,11 +1,11 @@
 import { useState } from "react";
+import type { FieldConfig } from "formik";
 import { BsEyeSlash } from "react-icons/bs";
 import { AiOutlineEye } from "react-icons/ai";
 import { Input, type InputProps } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import type { LabelProps } from "~/components/ui/label";
 import { FormFieldWrapper } from "../form-field-wrapper";
-import type { FieldConfig } from "formik";
 
 type Props = Omit<InputProps, "label"> &
   FieldConfig & {
@@ -20,15 +20,10 @@ type PasswordToggleButtonProps = {
   onToggle: () => void;
 };
 
-const PasswordToggleButton = ({
-  showPassword,
-  onToggle,
-}: PasswordToggleButtonProps) => (
+const PasswordToggleButton = ({ showPassword, onToggle }: PasswordToggleButtonProps) => (
   <Button type="button" variant="ghost" size="icon" onClick={onToggle}>
     {showPassword ? <BsEyeSlash /> : <AiOutlineEye />}
-    <span className="sr-only">
-      {showPassword ? "Hide password" : "Show password"}
-    </span>
+    <span className="sr-only">{showPassword ? "Hide password" : "Show password"}</span>
   </Button>
 );
 
@@ -46,12 +41,7 @@ export default function FormField({ type, endAdornment, ...props }: Props) {
 
   const getEndAdornment = () => {
     if (isPasswordField) {
-      return (
-        <PasswordToggleButton
-          showPassword={showPassword}
-          onToggle={togglePassword}
-        />
-      );
+      return <PasswordToggleButton showPassword={showPassword} onToggle={togglePassword} />;
     }
     return endAdornment;
   };
