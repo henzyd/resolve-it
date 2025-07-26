@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@config "../../tailwind.config.ts";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -49,6 +50,10 @@
 }
 
 @layer base {
+  html {
+    line-height: 1;
+  }
+
   button {
     @apply cursor-pointer;
   }
