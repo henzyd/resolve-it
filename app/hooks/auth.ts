@@ -22,19 +22,7 @@ export function useLogin() {
         sessionStorage.setItem(JWT_KEY, JSON.stringify(data.refresh_token));
         localStorage.removeItem(JWT_KEY);
       }
-
-      try {
-        const userData = await UsersService.getMe();
-        setUser(userData);
-        notifySuccess({ message: "Login successful" });
-      } catch (error) {
-        axiosPrivate.defaults.headers.common["Authorization"] = "";
-        localStorage.removeItem(JWT_KEY);
-        sessionStorage.removeItem(JWT_KEY);
-        notifyError({
-          message: "Login successful but failed to load user data. Please try again.",
-        });
-      }
+      notifySuccess({ message: "Login successful" });
     },
     onError: (error) => {
       if (isAxiosError(error)) {

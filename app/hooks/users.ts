@@ -2,13 +2,16 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { isAxiosError } from "axios";
 import UsersService from "~/services/users";
 import { notifyError } from "~/lib/toast";
+import { QUERY_KEYS } from "~/lib/query-keys";
+
+export const getUserQueryOptions = () => ({
+  queryKey: QUERY_KEYS.users.me,
+  queryFn: UsersService.getMe,
+  retry: false,
+});
 
 export function useGetMe() {
-  return useQuery<User>({
-    queryKey: ["current-user"],
-    queryFn: UsersService.getMe,
-    retry: 1,
-  });
+  return useQuery(getUserQueryOptions());
 }
 
 export function useUpdateMe() {
@@ -23,7 +26,7 @@ export function useUpdateMe() {
     },
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: ["current-user"],
+        queryKey: QUERY_KEYS.users.me,
       });
     },
   });

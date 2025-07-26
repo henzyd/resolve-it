@@ -65,14 +65,14 @@ axiosPrivate.interceptors.response.use(
         }
 
         try {
-          const { access, refresh } = await AuthService.refreshJwt({
-            refresh: refreshToken,
+          const { access_token, refresh_token } = await AuthService.refreshJwt({
+            refresh_token: refreshToken,
           });
-          if (access && refresh) {
-            originalRequest.headers.Authorization = `Bearer ${access}`;
-            axiosPrivate.defaults.headers.common["Authorization"] = "Bearer " + access;
+          if (access_token && refresh_token) {
+            originalRequest.headers.Authorization = `Bearer ${access_token}`;
+            axiosPrivate.defaults.headers.common["Authorization"] = "Bearer " + access_token;
 
-            const stringifiedRefresh = JSON.stringify(refresh);
+            const stringifiedRefresh = JSON.stringify(refresh_token);
 
             if (sessionToken) {
               sessionStorage.setItem(JWT_KEY, stringifiedRefresh);

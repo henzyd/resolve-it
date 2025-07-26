@@ -10,6 +10,7 @@ import type { Route } from "./+types/root";
 import TanstackQueryProvider from "./providers/tanstack-query";
 import { Toaster } from "./components/ui/sonner";
 import "./styles/global.css";
+import AppLoader from "./components/loaders/app";
 
 export const links: Route.LinksFunction = () => [];
 
@@ -29,6 +30,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </body>
     </html>
   );
+}
+
+const fallback = <AppLoader />;
+
+export function HydrateFallback() {
+  return fallback;
 }
 
 export default function App() {
